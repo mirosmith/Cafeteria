@@ -3,7 +3,6 @@ package mainBootApp.bootstrap;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -41,54 +40,44 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent>{
 		List<Coffee> list = new ArrayList<>();
 		
 		// Categories
-		Optional<Category> americanOptional = CategoryRepo.findByName("American");		
-		if (!americanOptional.isPresent()) {
+		Category american = CategoryRepo.findByName("American");		
+		if (american == null) {
+			throw new RuntimeException("Expected Category Not Found");			
+		}
+		
+		Category asia = CategoryRepo.findByName("Southeast Asia");		
+		if (asia == null) {
 			throw new RuntimeException("Expected Category Not Found");
 		}
 		
-		Optional<Category> asiaOptional = CategoryRepo.findByName("Southeast Asia");		
-		if (!asiaOptional.isPresent()) {
+		Category india = CategoryRepo.findByName("India");		
+		if (india == null) {
 			throw new RuntimeException("Expected Category Not Found");
 		}
 		
-		Optional<Category> indiaOptional = CategoryRepo.findByName("India");		
-		if (!indiaOptional.isPresent()) {
-			throw new RuntimeException("Expected Category Not Found");
-		}
-		
-		Optional<Category> africaOptional = CategoryRepo.findByName("Africa");		
-		if (!africaOptional.isPresent()) {
+		Category africa = CategoryRepo.findByName("Africa");		
+		if (africa == null) {
 			throw new RuntimeException("Expected Category Not Found");
 		}
 		
 		// Unit of measures
-		Optional<UnitOfMeasure> spoonOptional = UnitRepo.findByDescription("Teaspoon");	
-		if (!spoonOptional.isPresent()) {
+		UnitOfMeasure spoon = UnitRepo.findByDescription("Teaspoon");	
+		if (spoon == null) {
 			throw new RuntimeException("Expected Unit Not Found");
 		}
-		Optional<UnitOfMeasure> cupOptional = UnitRepo.findByDescription("Cup");	
-		if (!cupOptional.isPresent()) {
+		UnitOfMeasure cup = UnitRepo.findByDescription("Cup");	
+		if (cup == null) {
 			throw new RuntimeException("Expected Unit Not Found");
 		}
-		Optional<UnitOfMeasure> cmOptional = UnitRepo.findByDescription("Cm");	
-		if (!cmOptional.isPresent()) {
+		UnitOfMeasure cm = UnitRepo.findByDescription("Cm");	
+		if (cm == null) {
 			throw new RuntimeException("Expected Unit Not Found");
 		}
-		Optional<UnitOfMeasure> dollopOptional = UnitRepo.findByDescription("Dollop");	
-		if (!dollopOptional.isPresent()) {
+		UnitOfMeasure dollop = UnitRepo.findByDescription("Dollop");	
+		if (dollop == null) {
 			throw new RuntimeException("Expected Unit Not Found");
 		}
-		
-		Category american = americanOptional.get();
-		Category asia = asiaOptional.get();
-		Category india = indiaOptional.get();
-		Category africa = africaOptional.get();
-		
-		UnitOfMeasure spoon = spoonOptional.get();
-		UnitOfMeasure cup = cupOptional.get();
-		UnitOfMeasure cm = cmOptional.get();
-		UnitOfMeasure dollop = dollopOptional.get();
-		
+			
 		
 		// Espresso
 		Coffee espresso = new Coffee();
