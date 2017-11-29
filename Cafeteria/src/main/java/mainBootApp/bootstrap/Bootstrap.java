@@ -92,7 +92,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent>{
 				                + "But for the purposes of this post an espresso consists of:";
 		espressoNote.setCoffeeNote(prepareEspresso);		
 	
-		espresso.setDescription(espressoNote);		
+		espresso.setNote(espressoNote);		
 		
 		espresso.getCategory().add(american);
 		
@@ -111,7 +111,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent>{
 								+ "However the traditional way of making a short macchiato is as follows:";
 		macchiatoNote.setCoffeeNote(prepareMacchiato);
 		
-		macchiato.setDescription(macchiatoNote);
+		macchiato.setNote(macchiatoNote);
 		
 		macchiato.getCategory().add(africa);
 		macchiato.getCategory().add(india);

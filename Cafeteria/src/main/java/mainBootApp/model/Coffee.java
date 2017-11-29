@@ -55,11 +55,11 @@ public class Coffee {
 		this.image = loadImage(s);
 	}
 
-	public Note getDescription() {
+	public Note getNote() {
 		return note;
 	}
 
-	public void setDescription(Note description) {
+	public void setNote(Note description) {
 		this.note = description;
 		description.setCoffee(this);
 	}

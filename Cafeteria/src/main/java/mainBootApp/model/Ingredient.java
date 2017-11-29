@@ -21,6 +21,10 @@ public class Ingredient {
 	@OneToOne
 	private UnitOfMeasure unit;
 	
+	public Ingredient() {	
+		
+	}	
+	
 	public Ingredient(String description, BigDecimal amount, UnitOfMeasure unit, Coffee coffee) {		
 		this.description = description;
 		this.amount = amount;		
