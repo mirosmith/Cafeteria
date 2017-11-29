@@ -1,5 +1,10 @@
 package mainBootApp.model;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -14,7 +19,7 @@ public class Coffee {
 	private String name;
 	
 	@Lob
-	private Byte[] image;	
+	private byte[] image;	
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	private Note note;
@@ -42,12 +47,12 @@ public class Coffee {
 		this.name = name;
 	}
 
-	public Byte[] getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(Byte[] image) {
-		this.image = image;
+	public void setImage(String s) {
+		this.image = loadImage(s);
 	}
 
 	public Note getDescription() {
@@ -74,6 +79,33 @@ public class Coffee {
 	public void setCategory(Set<Category> category) {
 		this.category = category;
 	}	
+	
+	public byte[] loadImage(String s) {
+		
+		if (s.isEmpty() || s == null) {
+			return null;
+		}
+		try {
+		
+		Path path = Paths.get(s);
+		
+		if (Files.notExists(path) || Files.size(path) == 0) {
+			return null;			
+		}
+		byte[] array = new byte[(int)Files.size(path)];
+		
+		InputStream input = Files.newInputStream(path);
+		input.read(array);
+		
+		return array;
+		
+		}
+		catch (IOException e) {
+			System.err.println(e);			
+		}
+		return null;
+		
+	}
 	
 
 }

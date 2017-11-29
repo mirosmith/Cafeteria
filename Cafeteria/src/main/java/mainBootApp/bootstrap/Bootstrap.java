@@ -84,6 +84,8 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent>{
 		
 		espresso.setName("Espresso");
 		
+		espresso.setImage("src/main/resources/static/espresso.jpg");
+		
 		Note espressoNote = new Note();		
 		String prepareEspresso = "The espresso (aka “short black”) is the foundation and the most important part to every espresso based drink. "
 								+ "So much so that we’ve written a guide on how to make the perfect espresso shot. "
