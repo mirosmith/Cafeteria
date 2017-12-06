@@ -1,6 +1,7 @@
 package mainBootApp.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,21 @@ public class MyServiceImpl implements MyService {
 	public List<UnitOfMeasure> allUnits() {		
 		return (List<UnitOfMeasure>) unitRepo.findAll();
 	}
+
+	@Override
+	public Coffee findCoffeeById(Long id) {	
+		
+		Optional<Coffee> coffee = coffeeRepo.findById(id);
+		
+		if (!coffee.isPresent()) {
+			throw new RuntimeException("Coffee Not Found!");
+		}
+		
+		return coffee.get();
+	}
+	
+	
+	
 	
 
 }

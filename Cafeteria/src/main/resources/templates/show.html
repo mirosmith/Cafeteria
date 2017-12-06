@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Detail</title>
+</head>
+<body>
+
+<h1>Our Coffees</h1>
+
+<table border="1">
+	<thead>
+		<tr>
+			<th>IMAGE</th>
+			<th>NAME</th>
+			<th>CATEGORY</th>
+			<th>DESCRIPTION</th>
+			<th>INGREDIENTS</th>
+		</tr>
+	</thead>	
+	<tbody th:remove="all-but-first" align="center">
+		<tr th:each="item : ${coffee}">
+			<td>img</td>
+			<td th:text="${item.name}">coffee</td>
+			<td><p th:each="cat : ${item.category}" th:text="${cat.name}">India</p></td>
+			<td th:text="${item.note.coffeeNote}">Coffee from India</td>
+			<td><p th:each="ingr : ${item.ingredients}" th:text="${ingr.amount} + ' ' + ${ingr.unit.description} + ' ' + ${ingr.description}">2x sugar</p></td>
+		</tr>	
+		<tr>
+			<td>:-)</td>
+			<td>coffee</td>
+			<td>Africa</td>
+			<td>Lovely coffee from Africa</td>
+			<td>1x sugar</td>
+		</tr>
+	</tbody>	
+</table>
+</body>
+</html>

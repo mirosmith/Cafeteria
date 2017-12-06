@@ -1,7 +1,7 @@
 package mainBootApp;
 
 import static org.junit.Assert.assertEquals;
-
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -9,9 +9,11 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -57,7 +59,7 @@ public class MyServiceImplTest {
 		List<Coffee> list = new ArrayList<>();
 		list.add(coffee);		
 		
-		when(service.allCoffees()).thenReturn(list);
+		when(coffeeRepo.findAll()).thenReturn(list);
 		
 		List<Coffee> listData = service.allCoffees();
 		
@@ -86,6 +88,24 @@ public class MyServiceImplTest {
 		assertEquals(0, listData.size());
 		
 		verify(unitRepo, times(1)).findAll();
+		
+	}
+	
+	@Test
+	public void findCoffeeByIdTest() throws IOException {
+		
+		Coffee coffee = new Coffee();
+		coffee.setId(3L);
+		
+		Optional<Coffee> coffeeO = Optional.of(coffee);
+		
+		when(coffeeRepo.findById(ArgumentMatchers.anyLong())).thenReturn(coffeeO);
+		
+		Coffee returned = service.findCoffeeById(ArgumentMatchers.anyLong());
+		
+		assertEquals(coffee.getId(), returned.getId());
+		
+		verify(coffeeRepo, times(1)).findById(ArgumentMatchers.anyLong());
 		
 	}
 }
