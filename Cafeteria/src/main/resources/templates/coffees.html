@@ -3,30 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <title>Coffees</title>
+<link rel="stylesheet" type="text/css" media="all" href="main.css" th:href="@{/style.css}" />
 </head>
+
 <body>
+  <div class="container">
+  
+<h2>Cafeteria e-shop</h2>
 
-<h1>Our Coffees</h1>
-
-<table border="1">
-	<thead>
-		<tr>
-			<th>IMAGE</th>
-			<th>NAME</th>						
-		</tr>
-	</thead>	
-	<tbody th:remove="all-but-first" align="center">
-		<tr th:each="item : ${coffeeList}">
-			<td>img</td>
-			<td th:text="${item.name}">coffee</td>
-			<td><a href="#" th:href="@{'/coffees/'+ ${item.id}}">details</a></td> 			
-		</tr>	
-		<tr>
-			<td>:-)</td>
-			<td>coffee</td>			
-		</tr>
-	</tbody>	
-</table>
-
+	<div class="content">
+	
+		<ul th:remove="all-but-first">	
+			
+		      <li th:each="item : ${coffeeList}"> 
+		      	<a href="#" th:href="@{'/coffees/'+ ${item.id}}">      	
+		      		<p><img alt="espresso" src="#" th:src="@{/espresso.jpg}"></p>      		
+			        <p class="label" th:text="${item.name}">Coffee name</p>         	                          
+		        </a>
+		      </li>	
+		      <li> 
+		      	<a href="#">      		
+			           <p> Lorem ipsum dolor</p>
+			           <p> Lorem ipsum dolor</p>
+			           <p> Lorem ipsum dolor</p> 	                       
+		          </a>
+		      </li>
+		      <li> 
+		      	<a href="#">      		
+			           <p> Lorem ipsum dolor</p>
+			           <p> Lorem ipsum dolor</p>
+			           <p> Lorem ipsum dolor</p> 	                         
+		          </a>
+		      </li>
+		      <li> 
+		      	<a href="#">      		
+			           <p> Lorem ipsum dolor</p>
+			           <p> Lorem ipsum dolor</p>
+			           <p> Lorem ipsum dolor</p> 	                            
+		          </a>
+		      </li>	
+		</ul>
+		
+	</div>
+	
+</div>
 </body>
+
 </html>
