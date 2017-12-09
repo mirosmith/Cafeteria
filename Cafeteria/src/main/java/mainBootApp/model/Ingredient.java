@@ -16,19 +16,15 @@ public class Ingredient {
 	private BigDecimal amount;
 	
 	@ManyToOne
-	private Coffee coffee;
-	
-	@OneToOne
-	private UnitOfMeasure unit;
+	private Coffee coffee;	
 	
 	public Ingredient() {	
 		
 	}	
 	
-	public Ingredient(String description, BigDecimal amount, UnitOfMeasure unit, Coffee coffee) {		
+	public Ingredient(String description, BigDecimal amount, Coffee coffee) {		
 		this.description = description;
 		this.amount = amount;		
-		this.unit = unit;
 		this.coffee = coffee;
 	}	
 
@@ -63,14 +59,6 @@ public class Ingredient {
 	public void setCoffeeIngredient(Coffee coffeeIngredient) {
 		this.coffee = coffeeIngredient;
 	}
-
-	public UnitOfMeasure getUnit() {
-		return unit;
-	}
-
-	public void setUnit(UnitOfMeasure unit) {
-		this.unit = unit;
-	}	
 	
 
 }

@@ -1,7 +1,6 @@
 package mainBootApp;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -19,10 +18,8 @@ import org.mockito.MockitoAnnotations;
 
 import mainBootApp.model.Category;
 import mainBootApp.model.Coffee;
-import mainBootApp.model.UnitOfMeasure;
 import mainBootApp.repositories.CategoryRepository;
 import mainBootApp.repositories.CoffeeRepository;
-import mainBootApp.repositories.UnitOfMeasureRepository;
 import mainBootApp.services.MyService;
 import mainBootApp.services.MyServiceImpl;
 /**
@@ -39,16 +36,13 @@ public class MyServiceImplTest {
 	CoffeeRepository coffeeRepo;
 	
 	@Mock
-	CategoryRepository categoryRepo;
-	
-	@Mock
-	UnitOfMeasureRepository unitRepo;
+	CategoryRepository categoryRepo;	
 	
 	@Before
 	public void setUp() {		
 		MockitoAnnotations.initMocks(this);		
 		
-		service = new MyServiceImpl(coffeeRepo, categoryRepo, unitRepo);
+		service = new MyServiceImpl(coffeeRepo, categoryRepo);
 	}
 	
 	// Unit tests
@@ -80,16 +74,6 @@ public class MyServiceImplTest {
 		
 	}
 	
-	@Test
-	public void allUnitsTest() throws IOException {			
-		
-		List<UnitOfMeasure> listData = service.allUnits();
-		
-		assertEquals(0, listData.size());
-		
-		verify(unitRepo, times(1)).findAll();
-		
-	}
 	
 	@Test
 	public void findCoffeeByIdTest() throws IOException {
@@ -108,4 +92,22 @@ public class MyServiceImplTest {
 		verify(coffeeRepo, times(1)).findById(ArgumentMatchers.anyLong());
 		
 	}
+	
+	public void saveCoffeeTest() {
+		
+		Coffee coffee = new Coffee();
+		coffee.setId(4L);
+		
+		Optional<Coffee> c1 = Optional.of(coffee);		
+		
+		when(coffeeRepo.findById(ArgumentMatchers.anyLong())).thenReturn(c1);
+		
+		assertEquals(coffee.getId(), service.saveCoffee(ArgumentMatchers.any(Coffee.class)));
+		
+		when(coffeeRepo.save(ArgumentMatchers.any(Coffee.class))).thenReturn(c1.get());
+		
+		assertEquals(coffee.getId(), service.saveCoffee(ArgumentMatchers.any(Coffee.class)));
+		
+	}
+	
 }

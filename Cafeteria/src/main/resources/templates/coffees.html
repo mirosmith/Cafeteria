@@ -18,7 +18,7 @@
 		      <li th:each="item : ${coffeeList}"> 
 		      	<a href="#" th:href="@{'/coffees/'+ ${item.id}}">      	
 		      		<p><img alt="espresso" src="#" th:src="@{/espresso.jpg}"></p>      		
-			        <p class="label" th:text="${item.name}">Coffee name</p>         	                          
+			        <p class="label" th:text="${item.name}">Coffee name</p>			                	                          
 		        </a>
 		      </li>	
 		      <li> 
@@ -27,21 +27,7 @@
 			           <p> Lorem ipsum dolor</p>
 			           <p> Lorem ipsum dolor</p> 	                       
 		          </a>
-		      </li>
-		      <li> 
-		      	<a href="#">      		
-			           <p> Lorem ipsum dolor</p>
-			           <p> Lorem ipsum dolor</p>
-			           <p> Lorem ipsum dolor</p> 	                         
-		          </a>
-		      </li>
-		      <li> 
-		      	<a href="#">      		
-			           <p> Lorem ipsum dolor</p>
-			           <p> Lorem ipsum dolor</p>
-			           <p> Lorem ipsum dolor</p> 	                            
-		          </a>
-		      </li>	
+		      </li>		      
 		</ul>
 		
 	</div>

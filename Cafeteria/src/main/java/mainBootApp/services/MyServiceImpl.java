@@ -2,28 +2,26 @@ package mainBootApp.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
 import mainBootApp.model.Category;
 import mainBootApp.model.Coffee;
-import mainBootApp.model.UnitOfMeasure;
+import mainBootApp.model.Ingredient;
 import mainBootApp.repositories.CategoryRepository;
 import mainBootApp.repositories.CoffeeRepository;
-import mainBootApp.repositories.UnitOfMeasureRepository;
+
 
 @Service
 public class MyServiceImpl implements MyService {
 	
 	private CoffeeRepository coffeeRepo;
-	private CategoryRepository categoryRepo;
-	private UnitOfMeasureRepository unitRepo;
+	private CategoryRepository categoryRepo;	
 	
-	public MyServiceImpl(CoffeeRepository coffeeRepo, CategoryRepository categoryRepo,
-			UnitOfMeasureRepository unitRepo) {		
+	public MyServiceImpl(CoffeeRepository coffeeRepo, CategoryRepository categoryRepo) {		
 		this.coffeeRepo = coffeeRepo;
-		this.categoryRepo = categoryRepo;
-		this.unitRepo = unitRepo;
+		this.categoryRepo = categoryRepo;		
 	}
 
 	@Override
@@ -33,11 +31,7 @@ public class MyServiceImpl implements MyService {
 	@Override
 	public List<Category> allCategories() {		
 		return (List<Category>) categoryRepo.findAll();
-	}
-	@Override
-	public List<UnitOfMeasure> allUnits() {		
-		return (List<UnitOfMeasure>) unitRepo.findAll();
-	}
+	}	
 
 	@Override
 	public Coffee findCoffeeById(Long id) {	
@@ -50,7 +44,27 @@ public class MyServiceImpl implements MyService {
 		
 		return coffee.get();
 	}
-	
+
+	@Override	
+	public Coffee saveCoffee(Coffee coffee) {		
+		
+		//coffee.getIngredients().forEach(ingredient -> ingredient.setCoffeeIngredient(coffee));
+		
+		
+		
+		Coffee saved = coffeeRepo.save(coffee);
+		
+		return saved;
+	}
+/*
+	@Override
+	public Set<Ingredient> findIngredientsById(Long id) {
+		
+		Optional<Coffee> coffee = coffeeRepo.findById(id);		
+		
+		return coffee.get().getIngredients();
+	}
+*/	
 	
 	
 	

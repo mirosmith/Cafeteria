@@ -5,7 +5,9 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -25,7 +27,7 @@ public class Coffee {
 	private Note note;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="coffee")
-	private Set<Ingredient> ingredients = new HashSet<>();
+	private List<Ingredient> ingredients = new ArrayList<>();
 	
 	@ManyToMany
 	@JoinTable(name="Coffe_Category", joinColumns=@JoinColumn(name="Coffee_id"), inverseJoinColumns=@JoinColumn(name="Category_id"))
@@ -64,11 +66,11 @@ public class Coffee {
 		description.setCoffee(this);
 	}
 
-	public Set<Ingredient> getIngredients() {
+	public List<Ingredient> getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(Set<Ingredient> ingredients) {
+	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
 

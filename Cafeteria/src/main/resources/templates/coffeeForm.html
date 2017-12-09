@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Form</title>
+<link rel="stylesheet" type="text/css" media="all" href="main.css"
+	th:href="@{/style.css}" />
+</head>
+<body>
+
+	<div class="nav">
+		<ul>
+			<li><a href="#" th:href="@{/}">home</a></li>
+		</ul>
+	</div>
+
+	<div class="container">
+
+		<form action="#" method="post" th:action="@{/coffees}" th:object="${coffee}">
+
+			<input type="hidden" th:field="*{id}">
+			
+			<div class="element">
+				<h3>Name</h3>
+				<p>
+					<input type="text" th:field="*{name}">
+				</p>
+			</div>
+
+			<div class="element">
+				<h3>Country</h3>
+				
+				<ul style="list-style-type: none">
+					<li th:each="item : ${allCategories}">
+					
+						<input type="checkbox" th:field="*{category}" th:value="${item.id}"> 
+						<label th:for="${#ids.prev('category')}" th:text="${item.name}">Country</label>
+						
+					</li>
+				</ul>
+			</div>
+
+
+			<h3>Description</h3>
+			<p>
+				<textarea rows="15" cols="50" th:field="*{note.coffeeNote}"></textarea>
+			</p>
+
+			<h3>Ingredients</h3>
+			
+			<ul>
+				<li th:each="element, i : ${coffee.ingredients}" >
+				<input type="number" th:field="${coffee.ingredients[__${i.index}__].amount}">
+				<input type="text" th:field="${coffee.ingredients[__${i.index}__].description}">
+			</ul>
+		 
+			<p>
+				<input type="submit" value="Submit">
+			</p>
+		</form>
+
+	</div>
+</body>
+</html>

@@ -13,13 +13,13 @@
 	</div>
 	
 	<div class="container">
-	
+		<a class="link" href="#" th:href="@{'/coffees/' + ${coffee.id} + '/update'}">Update</a>
 		<p><img src="#" th:src="@{/espresso.jpg}"></p>		
 		<div class="element">			
 			<h3>NAME</h3>
 			<p th:text="${coffee.name}">Name</p>
 	    </div>	    
-	    <div class="element">
+	    <div class="element" th:unless="${#lists.isEmpty(coffee.category)}">
 			<h3>COUNTRY</h3>
 			<p th:each="cat : ${coffee.category}" th:text="${cat.name}">India</p>
 	    </div>  
@@ -29,7 +29,7 @@
 	    </div>           
 		<div class="element">
 			<h3>INGREDIENTS</h3>
-			<p th:each="ingr : ${coffee.ingredients}" th:text="${ingr.amount} + ' ' + ${ingr.unit.description} + ' ' + ${ingr.description}">2x sugar</p>	   
+			<p th:each="ingr : ${coffee.ingredients}" th:text="${ingr.amount} + ' ' + ${ingr.description}">2x sugar</p>	   
 	    </div>    
 	
 	</div>

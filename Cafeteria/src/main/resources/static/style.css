@@ -30,8 +30,16 @@ img {
 	float: left;				
 }
 
-.nav ul {
-  
+input {
+	height: 35px;
+	font-size: 18px;
+}
+
+label, textarea {
+	font-size: 18px;
+}
+
+.nav ul {  
   list-style-type: none;
   margin: 0;
   padding: 10px 0 0 0;

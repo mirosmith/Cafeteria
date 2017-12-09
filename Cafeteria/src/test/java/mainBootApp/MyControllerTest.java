@@ -5,20 +5,21 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -87,7 +88,52 @@ public class MyControllerTest {
 			   .andExpect(status().isOk())
 			   .andExpect(view().name("show"))
 			   .andExpect(model().attributeExists("coffee"));
-	}		   	
+	}	
+	
+	@Test
+	public void updateCoffeeByIdTest() throws Exception {
+		
+		Coffee cf = new Coffee();
+		cf.setId(3L);
+		
+		when(service.findCoffeeById(ArgumentMatchers.anyLong())).thenReturn(cf);
+		
+		ArgumentCaptor<Coffee> captor = ArgumentCaptor.forClass(Coffee.class);
+
+		
+		mockMvc.perform(get("/coffees/update/1"))
+			   .andExpect(status().isOk())
+			   .andExpect(view().name("coffeeForm"))
+			   .andExpect(model().attributeExists("coffee"))
+			   .andExpect(model().attributeExists("allCategories"));
+		
+		
+		//check if model contains correct Coffee object with ID = 3
+		controller.updateCoffeeById("50", model);
+		
+		verify(model, times(1)).addAttribute(ArgumentMatchers.eq("coffee"), captor.capture());
+		
+		assertEquals(cf.getId(), captor.getValue().getId());		
+		
+	}
+	
+	@Test
+	public void updatePostCoffeeByIdTest() throws Exception {
+		
+		Coffee cf = new Coffee();
+		cf.setId(2L);
+		
+		when(service.saveCoffee(ArgumentMatchers.any(Coffee.class))).thenReturn(cf);
+		
+		mockMvc.perform(post("/coffees")
+			   .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+			   .param("id", "")
+			   .param("name", "some name")
+			   )
+			   .andExpect(status().is3xxRedirection())
+			   .andExpect(view().name("redirect:/coffees/2"));
+	}
+	
 	
 
 }

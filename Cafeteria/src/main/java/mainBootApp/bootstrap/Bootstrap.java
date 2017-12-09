@@ -12,22 +12,18 @@ import mainBootApp.model.Category;
 import mainBootApp.model.Coffee;
 import mainBootApp.model.Ingredient;
 import mainBootApp.model.Note;
-import mainBootApp.model.UnitOfMeasure;
 import mainBootApp.repositories.CategoryRepository;
 import mainBootApp.repositories.CoffeeRepository;
-import mainBootApp.repositories.UnitOfMeasureRepository;
 
 @Component
 public class Bootstrap implements ApplicationListener<ContextRefreshedEvent>{
 	
 	private CoffeeRepository CoffeeRepo;
-	private CategoryRepository CategoryRepo;
-	private UnitOfMeasureRepository UnitRepo;	
+	private CategoryRepository CategoryRepo;		
 
-	public Bootstrap(CoffeeRepository coffeeRepo, CategoryRepository categoryRepo, UnitOfMeasureRepository unitRepo) {		
+	public Bootstrap(CoffeeRepository coffeeRepo, CategoryRepository categoryRepo) {		
 		CoffeeRepo = coffeeRepo;
-		CategoryRepo = categoryRepo;
-		UnitRepo = unitRepo;
+		CategoryRepo = categoryRepo;		
 	}
 	
 	@Override
@@ -45,7 +41,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent>{
 			throw new RuntimeException("Expected Category Not Found");			
 		}
 		
-		Category asia = CategoryRepo.findByName("Southeast Asia");		
+		Category asia = CategoryRepo.findByName("SouthEast Asia");		
 		if (asia == null) {
 			throw new RuntimeException("Expected Category Not Found");
 		}
@@ -58,26 +54,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent>{
 		Category africa = CategoryRepo.findByName("Africa");		
 		if (africa == null) {
 			throw new RuntimeException("Expected Category Not Found");
-		}
-		
-		// Unit of measures
-		UnitOfMeasure spoon = UnitRepo.findByDescription("Teaspoon");	
-		if (spoon == null) {
-			throw new RuntimeException("Expected Unit Not Found");
-		}
-		UnitOfMeasure cup = UnitRepo.findByDescription("Cup");	
-		if (cup == null) {
-			throw new RuntimeException("Expected Unit Not Found");
-		}
-		UnitOfMeasure cm = UnitRepo.findByDescription("Cm");	
-		if (cm == null) {
-			throw new RuntimeException("Expected Unit Not Found");
-		}
-		UnitOfMeasure dollop = UnitRepo.findByDescription("Dollop");	
-		if (dollop == null) {
-			throw new RuntimeException("Expected Unit Not Found");
-		}
-			
+		}			
 		
 		// Espresso
 		Coffee espresso = new Coffee();
@@ -96,7 +73,7 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent>{
 		
 		espresso.getCategory().add(american);
 		
-		espresso.getIngredients().add(new Ingredient("1 Shot of espresso in an espresso cup", new BigDecimal(1), cup, espresso));
+		espresso.getIngredients().add(new Ingredient("1 Shot of espresso in an espresso cup", new BigDecimal(1), espresso));
 		
 		list.add(espresso);
 		
@@ -116,9 +93,9 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent>{
 		macchiato.getCategory().add(africa);
 		macchiato.getCategory().add(india);
 		
-		macchiato.getIngredients().add(new Ingredient("Shot of espresso in a short glass or espresso cup", new BigDecimal(1), cup, macchiato));
-		macchiato.getIngredients().add(new Ingredient("A dollop of steamed milk", new BigDecimal(1.5), dollop, macchiato));
-		macchiato.getIngredients().add(new Ingredient("A foam placed on top of the espresso", new BigDecimal(0.5), dollop, macchiato));
+		macchiato.getIngredients().add(new Ingredient("Shot of espresso in a short glass or espresso cup", new BigDecimal(1), macchiato));
+		macchiato.getIngredients().add(new Ingredient("A dollop of steamed milk", new BigDecimal(1.5), macchiato));
+		macchiato.getIngredients().add(new Ingredient("A foam placed on top of the espresso", new BigDecimal(0.5), macchiato));
 		
 		list.add(macchiato);
 		
