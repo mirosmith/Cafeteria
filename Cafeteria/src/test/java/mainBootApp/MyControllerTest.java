@@ -101,7 +101,7 @@ public class MyControllerTest {
 		ArgumentCaptor<Coffee> captor = ArgumentCaptor.forClass(Coffee.class);
 
 		
-		mockMvc.perform(get("/coffees/update/1"))
+		mockMvc.perform(get("/coffees/1/update"))
 			   .andExpect(status().isOk())
 			   .andExpect(view().name("coffeeForm"))
 			   .andExpect(model().attributeExists("coffee"))

@@ -1,11 +1,10 @@
 package mainBootApp.services;
 
 import java.util.List;
-import java.util.Set;
 
 import mainBootApp.model.Category;
 import mainBootApp.model.Coffee;
-import mainBootApp.model.Ingredient;
+
 
 public interface MyService {
 	

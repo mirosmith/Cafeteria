@@ -2,13 +2,12 @@ package mainBootApp.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
 import mainBootApp.model.Category;
 import mainBootApp.model.Coffee;
-import mainBootApp.model.Ingredient;
+
 import mainBootApp.repositories.CategoryRepository;
 import mainBootApp.repositories.CoffeeRepository;
 

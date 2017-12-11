@@ -1,7 +1,6 @@
 package mainBootApp.cotrollers;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import mainBootApp.model.Category;
 import mainBootApp.model.Coffee;
-import mainBootApp.model.Ingredient;
 import mainBootApp.services.MyService;
 
 @Controller
