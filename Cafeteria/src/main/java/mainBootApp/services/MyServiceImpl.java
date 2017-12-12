@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import mainBootApp.model.Category;
 import mainBootApp.model.Coffee;
-
+import mainBootApp.model.Ingredient;
 import mainBootApp.repositories.CategoryRepository;
 import mainBootApp.repositories.CoffeeRepository;
 
@@ -47,24 +47,28 @@ public class MyServiceImpl implements MyService {
 	@Override	
 	public Coffee saveCoffee(Coffee coffee) {		
 		
-		//coffee.getIngredients().forEach(ingredient -> ingredient.setCoffeeIngredient(coffee));
+		List<Ingredient> list = coffee.getIngredients();
 		
-		
+		for (int i = 0; i < list.size(); i++) {
+			list.get(i).setCoffeeIngredient(coffee);
+		}
 		
 		Coffee saved = coffeeRepo.save(coffee);
 		
 		return saved;
 	}
-/*
+
 	@Override
-	public Set<Ingredient> findIngredientsById(Long id) {
+	public List<Ingredient> findIngredientsById(Long id) {
 		
-		Optional<Coffee> coffee = coffeeRepo.findById(id);		
+		Optional<Coffee> coffee = coffeeRepo.findById(id);	
+		
+		if (!coffee.isPresent()) {
+			throw new RuntimeException("Coffee Not Found!");
+		}
 		
 		return coffee.get().getIngredients();
-	}
-*/	
-	
+	}	
 	
 	
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import mainBootApp.model.Category;
 import mainBootApp.model.Coffee;
+import mainBootApp.model.Ingredient;
 import mainBootApp.services.MyService;
 
 @Controller
@@ -60,7 +61,30 @@ public class MyController {
 		
 		return "redirect:/coffees/" + savedCoffee.getId();
 	}
+	/*
+	@GetMapping("/coffees/{id}/ingredients")
+	public String findIngredientsById(@PathVariable String id, Model model) {
+		
+		List<Ingredient> ingr = service.findIngredientsById(new Long(id));
+		model.addAttribute("ingredients", ingr);
+		
+		return "ingredients";
+	}*/
 	
+	@GetMapping("/coffees/{id}/ingredients/new")
+	public String newIngredientGet(@PathVariable String id, Model model) {
+		
+		Coffee foundCoffee = service.findCoffeeById(new Long(id));
+		List<Category> categories = service.allCategories();
+		Ingredient ingredient = new Ingredient();
+		foundCoffee.getIngredients().add(ingredient);		
+		
+		model.addAttribute("coffee", foundCoffee);
+		model.addAttribute("allCategories", categories);
+		model.addAttribute("newIngr", ingredient);
+		
+		return "coffeeForm";
+	}
 	
 
 }

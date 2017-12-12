@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Form</title>
+<link rel="stylesheet" type="text/css" media="all" href="main.css"
+	th:href="@{/style.css}" />
+</head>
+<body>
+
+	<div class="nav">
+		<ul>
+			<li><a href="#" th:href="@{/}">home</a></li>
+		</ul>
+	</div>
+
+	<div class="container">
+
+		<form action="#" method="post" th:action="@{/coffees}">		
+
+			<h3>Ingredients</h3>
+			
+			<ul>
+				<li th:each="element : ${ingredients}" >
+				<p th:text="${element.id}"></p>
+				<p th:text="${element.amount}"></p>
+				<p th:text="${element.description}"></p>
+				<p th:text="${element.coffeeIngredient.name}"></p>
+			</ul>
+		 
+			<p>
+				<input type="submit" value="Submit">
+			</p>
+		</form>
+
+	</div>
+</body>
+</html>

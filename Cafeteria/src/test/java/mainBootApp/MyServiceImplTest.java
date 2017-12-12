@@ -1,12 +1,14 @@
 package mainBootApp;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,7 @@ import org.mockito.MockitoAnnotations;
 
 import mainBootApp.model.Category;
 import mainBootApp.model.Coffee;
+import mainBootApp.model.Ingredient;
 import mainBootApp.repositories.CategoryRepository;
 import mainBootApp.repositories.CoffeeRepository;
 import mainBootApp.services.MyService;
@@ -97,17 +100,35 @@ public class MyServiceImplTest {
 		
 		Coffee coffee = new Coffee();
 		coffee.setId(4L);
+		coffee.setIngredients(Arrays.asList(new Ingredient(), new Ingredient()));
 		
-		Optional<Coffee> c1 = Optional.of(coffee);		
-		
-		when(coffeeRepo.findById(ArgumentMatchers.anyLong())).thenReturn(c1);
-		
-		assertEquals(coffee.getId(), service.saveCoffee(ArgumentMatchers.any(Coffee.class)));
+		Optional<Coffee> c1 = Optional.of(coffee);	
 		
 		when(coffeeRepo.save(ArgumentMatchers.any(Coffee.class))).thenReturn(c1.get());
 		
+		List<Ingredient> list = service.saveCoffee(ArgumentMatchers.any(Coffee.class)).getIngredients();
+		
 		assertEquals(coffee.getId(), service.saveCoffee(ArgumentMatchers.any(Coffee.class)));
+		assertEquals(2, list.size());
 		
 	}
+	
+	@Test
+	public void findIngredientsByIdTest() throws IOException {
+		
+		Coffee cf = new Coffee();
+		cf.setIngredients(Arrays.asList(new Ingredient(), new Ingredient()));
+		
+		Optional<Coffee> optional = Optional.of(cf);
+		
+		when(coffeeRepo.findById(ArgumentMatchers.anyLong())).thenReturn(optional);
+		
+		List<Ingredient> list = service.findIngredientsById(1L);
+		
+		verify(coffeeRepo, only()).findById(ArgumentMatchers.anyLong());		
+		
+		assertEquals(2, list.size());
+	}
+	
 	
 }

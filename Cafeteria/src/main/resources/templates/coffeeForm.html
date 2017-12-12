@@ -30,7 +30,7 @@
 			<div class="element">
 				<h3>Country</h3>
 				
-				<ul style="list-style-type: none">
+				<ul style="list-style-type: none; text-align:left; margin-left: 40%;">
 					<li th:each="item : ${allCategories}">
 					
 						<input type="checkbox" th:field="*{category}" th:value="${item.id}"> 
@@ -50,8 +50,13 @@
 			
 			<ul>
 				<li th:each="element, i : ${coffee.ingredients}" >
-				<input type="number" th:field="${coffee.ingredients[__${i.index}__].amount}">
-				<input type="text" th:field="${coffee.ingredients[__${i.index}__].description}">
+					<input type="hidden" th:field="${coffee.ingredients[__${i.index}__].id}">
+					<input class="small" type="number" th:field="${coffee.ingredients[__${i.index}__].amount}">
+					<input class="large" type="text" th:field="${coffee.ingredients[__${i.index}__].description}">
+				</li>				
+				<li th:unless="${newIngr}">
+					<a class="link" href="#"  th:href="@{'/coffees/'+ *{id} + '/ingredients/new'}">new ingredient</a>				
+				</li>
 			</ul>
 		 
 			<p>

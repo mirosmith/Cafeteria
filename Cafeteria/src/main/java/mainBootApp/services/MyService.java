@@ -4,6 +4,7 @@ import java.util.List;
 
 import mainBootApp.model.Category;
 import mainBootApp.model.Coffee;
+import mainBootApp.model.Ingredient;
 
 
 public interface MyService {
@@ -12,7 +13,6 @@ public interface MyService {
 	List<Category> allCategories();	
 	Coffee findCoffeeById(Long id);
 	Coffee saveCoffee(Coffee coffee);
-	//Set<Ingredient> findIngredientsById(Long id);
-	
+	List<Ingredient> findIngredientsById(Long id);	
 
 }

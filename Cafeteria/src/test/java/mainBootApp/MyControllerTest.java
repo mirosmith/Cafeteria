@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +27,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import mainBootApp.cotrollers.MyController;
+import mainBootApp.model.Category;
 import mainBootApp.model.Coffee;
 import mainBootApp.services.MyService;
 
@@ -111,6 +113,7 @@ public class MyControllerTest {
 		//check if model contains correct Coffee object with ID = 3
 		controller.updateCoffeeById("50", model);
 		
+		//verify(service, times(1)).findCoffeeById(ArgumentMatchers.anyLong());
 		verify(model, times(1)).addAttribute(ArgumentMatchers.eq("coffee"), captor.capture());
 		
 		assertEquals(cf.getId(), captor.getValue().getId());		
@@ -123,7 +126,7 @@ public class MyControllerTest {
 		Coffee cf = new Coffee();
 		cf.setId(2L);
 		
-		when(service.saveCoffee(ArgumentMatchers.any(Coffee.class))).thenReturn(cf);
+		when(service.saveCoffee(ArgumentMatchers.any(Coffee.class))).thenReturn(cf);		
 		
 		mockMvc.perform(post("/coffees")
 			   .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -131,8 +134,35 @@ public class MyControllerTest {
 			   .param("name", "some name")
 			   )
 			   .andExpect(status().is3xxRedirection())
-			   .andExpect(view().name("redirect:/coffees/2"));
+			   .andExpect(view().name("redirect:/coffees/2"));		
+		
 	}
+	
+	@Test
+	public void newIngredientGetTest() throws Exception {
+		
+		Coffee cf = new Coffee();
+		cf.setId(3L);
+		
+		when(service.findCoffeeById(ArgumentMatchers.anyLong())).thenReturn(cf);
+		when(service.allCategories()).thenReturn(Arrays.asList(new Category()));
+		
+		//controller.newIngredientGet("2", model);
+		
+		mockMvc.perform(get("/coffees/2/ingredients/new"))
+			   .andExpect(status().isOk())
+			   .andExpect(view().name("coffeeForm"))
+			   .andExpect(model().attributeExists("coffee"))
+			   .andExpect(model().attributeExists("allCategories"))
+			   .andExpect(model().attributeExists("newIngr"));
+		
+		verify(service, times(1)).findCoffeeById(ArgumentMatchers.anyLong());
+		verify(service, times(1)).allCategories();
+		//verify(model, times(1)).addAttribute(ArgumentMatchers.eq("newIngr"), ArgumentMatchers.any(Ingredient.class));
+		
+		assertEquals(1, service.allCategories().size());
+	}
+	
 	
 	
 
