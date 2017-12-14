@@ -3,36 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <title>Coffees</title>
-<link rel="stylesheet" type="text/css" media="all" href="main.css" th:href="@{/style.css}" />
+<link rel="stylesheet" type="text/css" media="all" href="main.css"
+	th:href="@{/style.css}" />
 </head>
 
 <body>
-  <div class="container">
-  
-<h2>Cafeteria e-shop</h2>
+	<div class="container">
 
-	<div class="content">
-	
-		<ul th:remove="all-but-first">	
-			
-		      <li th:each="item : ${coffeeList}"> 
-		      	<a href="#" th:href="@{'/coffees/'+ ${item.id}}">      	
-		      		<p><img alt="espresso" src="#" th:src="@{/espresso.jpg}"></p>      		
-			        <p class="label" th:text="${item.name}">Coffee name</p>			                	                          
-		        </a>
-		      </li>	
-		      <li> 
-		      	<a href="#">      		
-			           <p> Lorem ipsum dolor</p>
-			           <p> Lorem ipsum dolor</p>
-			           <p> Lorem ipsum dolor</p> 	                       
-		          </a>
-		      </li>		      
-		</ul>
-		
+		<h2>Cafeteria e-shop</h2>
+
+		<div class="content">
+
+			<ul>
+				<li th:each="item : ${coffeeList}">
+					<a href="#" th:href="@{'/coffees/'+ ${item.id}}">
+						<p>
+							<img alt="espresso" src="#" th:src="@{/espresso.jpg}">
+						</p>
+						<p class="label" th:text="${item.name}">Coffee name</p>
+					</a>
+				</li>
+				<li>
+					<a href="#" th:href="@{/coffees/new}">
+						<p class="plus">+</p>
+					</a>
+				</li>
+				<li th:remove="all">
+					<a href="#">
+						<p>Lorem ipsum dolor</p>
+						<p>Lorem ipsum dolor</p>
+						<p>Lorem ipsum dolor</p>
+					</a>
+				</li>
+			</ul>
+
+		</div>
+
 	</div>
-	
-</div>
 </body>
 
 </html>

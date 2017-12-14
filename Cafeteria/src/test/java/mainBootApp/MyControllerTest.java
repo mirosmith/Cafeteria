@@ -13,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -90,7 +91,32 @@ public class MyControllerTest {
 			   .andExpect(status().isOk())
 			   .andExpect(view().name("show"))
 			   .andExpect(model().attributeExists("coffee"));
-	}	
+	}
+	
+	@Test
+	public void addCoffee() throws Exception {	
+		
+		List<Category> categories = Arrays.asList(new Category());	
+		
+		when(service.allCategories()).thenReturn(categories);
+		
+		mockMvc.perform(get("/coffees/new"))
+		   .andExpect(status().isOk())
+	       .andExpect(view().name("coffeeForm"))	       
+		   .andExpect(model().attributeExists("allCategories"))
+		   .andExpect(model().attributeExists("coffee"))
+		   .andExpect(model().attributeExists("newIngr"));  		
+				
+	}
+	
+	@Test
+	public void deleteCoffeeTest() throws Exception {		
+		
+		mockMvc.perform(get("/coffees/2/delete"))
+			   .andExpect(status().is3xxRedirection())
+			   .andExpect(view().name("redirect:/"));
+		
+	}
 	
 	@Test
 	public void updateCoffeeByIdTest() throws Exception {

@@ -2,6 +2,9 @@ package mainBootApp.model;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 public class Note {
 	
@@ -13,6 +16,7 @@ public class Note {
 	private String coffeeNote;
 	
 	@OneToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Coffee coffee;
 
 	public Long getId() {

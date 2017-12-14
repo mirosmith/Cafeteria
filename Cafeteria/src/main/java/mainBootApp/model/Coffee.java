@@ -23,7 +23,7 @@ public class Coffee {
 	@Lob
 	private byte[] image;	
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL)	
 	private Note note;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="coffee")

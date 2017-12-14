@@ -13,6 +13,7 @@ public interface MyService {
 	List<Category> allCategories();	
 	Coffee findCoffeeById(Long id);
 	Coffee saveCoffee(Coffee coffee);
-	List<Ingredient> findIngredientsById(Long id);	
+	List<Ingredient> findIngredientsById(Long id);
+	void deleteCoffeeById(Long long1);	
 
 }

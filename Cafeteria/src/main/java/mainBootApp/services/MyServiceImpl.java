@@ -51,12 +51,17 @@ public class MyServiceImpl implements MyService {
 		
 		for (int i = 0; i < list.size(); i++) {
 			list.get(i).setCoffeeIngredient(coffee);
-		}
+		}		
 		
 		Coffee saved = coffeeRepo.save(coffee);
 		
 		return saved;
-	}
+	}	
+	
+	@Override
+	public void deleteCoffeeById(Long long1) {		
+		coffeeRepo.deleteById(long1);
+	}		
 
 	@Override
 	public List<Ingredient> findIngredientsById(Long id) {
@@ -69,7 +74,6 @@ public class MyServiceImpl implements MyService {
 		
 		return coffee.get().getIngredients();
 	}	
-	
 	
 
 }

@@ -33,6 +33,21 @@ public class MyController {
 		return "coffees";
 	}
 	
+	@GetMapping("/coffees/new")
+	public String addCoffee(Model model) {
+		
+		Coffee coffee = new Coffee();
+		List<Category> categories = service.allCategories();
+		Ingredient ingredient = new Ingredient();
+		coffee.getIngredients().add(ingredient);		
+		
+		model.addAttribute("coffee", coffee);
+		model.addAttribute("allCategories", categories);
+		model.addAttribute("newIngr", ingredient);
+		
+		return "coffeeForm";
+	}
+	
 	@GetMapping("/coffees/{id}")
 	public String showCoffeeById(@PathVariable String id, Model model) {
 		
@@ -40,6 +55,14 @@ public class MyController {
 		model.addAttribute("coffee", searchedCoffee);
 		
 		return "show";
+	}
+	
+	@GetMapping("/coffees/{id}/delete")
+	public String deleteCoffee(@PathVariable String id) {
+		
+		service.deleteCoffeeById(new Long(id));
+		
+		return "redirect:/";
 	}
 	
 	@GetMapping("/coffees/{id}/update")

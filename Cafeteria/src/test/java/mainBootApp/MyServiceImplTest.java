@@ -113,6 +113,12 @@ public class MyServiceImplTest {
 		
 	}
 	
+	public void deleteCoffeeByIdTest() {
+		
+		verify(coffeeRepo, only()).deleteById(ArgumentMatchers.anyLong());
+		
+	}
+	
 	@Test
 	public void findIngredientsByIdTest() throws IOException {
 		
