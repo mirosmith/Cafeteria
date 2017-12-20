@@ -61,7 +61,8 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent>{
 		
 		espresso.setName("Espresso");
 		
-		espresso.setImage("src/main/resources/static/espresso.jpg");
+		//espresso.setImage("src/main/resources/static/espresso.jpg");
+		espresso.setImage(espresso.loadImage("src/main/resources/static/espresso.jpg"));
 		
 		Note espressoNote = new Note();		
 		String prepareEspresso = "The espresso (aka “short black”) is the foundation and the most important part to every espresso based drink. "
@@ -83,7 +84,8 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent>{
 		
 		macchiato.setName("Macchiato");
 		
-		macchiato.setImage("src/main/resources/static/macchiato.jpg");
+		//macchiato.setImage("src/main/resources/static/macchiato.jpg");
+		macchiato.setImage(macchiato.loadImage("src/main/resources/static/macchiato.jpg"));
 		
 		Note macchiatoNote = new Note();
 		String prepareMacchiato = "A short macchiato is similar to an espresso but with a dollop of steamed milk and foam to mellow the harsh taste of an espresso. "
@@ -108,7 +110,8 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent>{
 		
 		Coffee latte = new Coffee();
 		latte.setName("Cafe Latte");
-		latte.setImage("src/main/resources/static/latte.jpg");
+		//latte.setImage("src/main/resources/static/latte.jpg");
+		latte.setImage(latte.loadImage("src/main/resources/static/latte.jpg"));
 		
 		Note latteNote = new Note();
 		String prepareLatte = "A café latte, or “latte” for short, is an espresso based drink with steamed milk and micro-foam added to the coffee. "

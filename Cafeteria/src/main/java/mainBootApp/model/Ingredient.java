@@ -3,7 +3,6 @@ package mainBootApp.model;
 import java.math.BigDecimal;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Ingredient {

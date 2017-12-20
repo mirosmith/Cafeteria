@@ -14,6 +14,7 @@ public interface MyService {
 	Coffee findCoffeeById(Long id);
 	Coffee saveCoffee(Coffee coffee);
 	List<Ingredient> findIngredientsById(Long id);
-	void deleteCoffeeById(Long long1);	
+	void saveIngredientsById(Long id, List<Ingredient> list);
+	void deleteCoffeeById(Long long1);		
 
 }

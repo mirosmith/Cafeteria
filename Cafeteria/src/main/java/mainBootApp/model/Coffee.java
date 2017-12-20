@@ -26,7 +26,7 @@ public class Coffee {
 	@Lob
 	private byte[] image;	
 	
-	@OneToOne(cascade=CascadeType.ALL)	
+	@OneToOne(mappedBy="coffee",cascade=CascadeType.ALL)	
 	private Note note;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="coffee")
@@ -56,8 +56,8 @@ public class Coffee {
 		return image;
 	}
 
-	public void setImage(String s) {
-		this.image = loadImage(s);
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 	public Note getNote() {

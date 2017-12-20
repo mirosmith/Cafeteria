@@ -93,7 +93,8 @@ public class MyController {
 			model.addAttribute("allCategories", categories);			
 			return "coffeeForm";
 		}
-		Coffee savedCoffee = service.saveCoffee(coffee);		
+		Coffee savedCoffee = service.saveCoffee(coffee);
+		service.saveIngredientsById(savedCoffee.getId(), coffee.getIngredients());
 		
 		return "redirect:/coffees/" + savedCoffee.getId();
 	}

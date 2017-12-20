@@ -96,7 +96,30 @@ public class MyServiceImplTest {
 		
 	}
 	
-	public void saveCoffeeTest() {
+	@Test
+	public void saveCoffeeTestNew() {		
+		
+		Coffee coffee = new Coffee();
+		//coffee.setId(4L);
+		coffee.setIngredients(Arrays.asList(new Ingredient(), new Ingredient()));
+		
+		//Optional<Coffee> c1 = Optional.of(coffee);	
+		
+		when(coffeeRepo.findById(ArgumentMatchers.anyLong())).thenReturn(null);
+		when(coffeeRepo.save(ArgumentMatchers.any(Coffee.class))).thenReturn(coffee);
+		
+		Coffee saved = service.saveCoffee(coffee);
+		
+		List<Ingredient> list = saved.getIngredients();
+		
+		assertNull(saved.getId());
+		assertEquals(2, list.size());
+		assertNull(saved.getNote());
+		
+	}
+	
+	@Test
+	public void saveCoffeeTestUpdate() {		
 		
 		Coffee coffee = new Coffee();
 		coffee.setId(4L);
@@ -104,16 +127,23 @@ public class MyServiceImplTest {
 		
 		Optional<Coffee> c1 = Optional.of(coffee);	
 		
-		when(coffeeRepo.save(ArgumentMatchers.any(Coffee.class))).thenReturn(c1.get());
+		when(coffeeRepo.findById(ArgumentMatchers.anyLong())).thenReturn(c1);
+		when(coffeeRepo.save(ArgumentMatchers.any(Coffee.class))).thenReturn(null);
 		
-		List<Ingredient> list = service.saveCoffee(ArgumentMatchers.any(Coffee.class)).getIngredients();
+		Coffee saved = service.saveCoffee(coffee);
 		
-		assertEquals(coffee.getId(), service.saveCoffee(ArgumentMatchers.any(Coffee.class)));
+		List<Ingredient> list = saved.getIngredients();
+		
+		assertEquals(coffee.getId(), saved.getId());
 		assertEquals(2, list.size());
+		assertNull(saved.getNote());
 		
 	}
 	
+	@Test
 	public void deleteCoffeeByIdTest() {
+		
+		service.deleteCoffeeById(ArgumentMatchers.anyLong());
 		
 		verify(coffeeRepo, only()).deleteById(ArgumentMatchers.anyLong());
 		
