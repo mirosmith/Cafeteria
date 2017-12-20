@@ -22,8 +22,9 @@
 			
 			<div class="element">
 				<h3>Name</h3>
+				<p style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error - name</p>
 				<p>
-					<input type="text" th:field="*{name}">
+					<input type="text" th:field="*{name}">					
 				</p>
 			</div>
 
@@ -41,7 +42,7 @@
 			</div>
 
 			 
-			<h3>Description</h3>
+			<h3>Description</h3>			
 			<p>
 				<textarea rows="15" cols="50" th:field="*{note.coffeeNote}"></textarea>
 			</p>
@@ -50,11 +51,11 @@
 			
 			<ul>
 				<li th:each="element, i : ${coffee.ingredients}" >
-					<input type="hidden" th:field="${coffee.ingredients[__${i.index}__].id}">
+					<input type="hidden" th:field="${coffee.ingredients[__${i.index}__].id}">					
 					<input class="small" type="number" th:field="${coffee.ingredients[__${i.index}__].amount}">
 					<input class="large" type="text" th:field="${coffee.ingredients[__${i.index}__].description}">
 				</li>				
-				<li th:unless="${newIngr}">
+				<li th:if="${newIngr == null and coffee.id != null}">
 					<a class="link" href="#"  th:href="@{'/coffees/'+ *{id} + '/ingredients/new'}">new ingredient</a>				
 				</li>
 			</ul>

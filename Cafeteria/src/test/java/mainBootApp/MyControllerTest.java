@@ -147,7 +147,7 @@ public class MyControllerTest {
 	}
 	
 	@Test
-	public void updatePostCoffeeByIdTest() throws Exception {
+	public void saveOrUpdateTestCorrect() throws Exception {
 		
 		Coffee cf = new Coffee();
 		cf.setId(2L);
@@ -157,10 +157,28 @@ public class MyControllerTest {
 		mockMvc.perform(post("/coffees")
 			   .contentType(MediaType.APPLICATION_FORM_URLENCODED)
 			   .param("id", "")
-			   .param("name", "some name")
+			   .param("name", "someName")
 			   )
 			   .andExpect(status().is3xxRedirection())
 			   .andExpect(view().name("redirect:/coffees/2"));		
+		
+	}
+	
+	@Test
+	public void saveOrUpdateTestWrong() throws Exception {
+		
+		Coffee cf = new Coffee();
+		cf.setId(2L);
+		
+		when(service.saveCoffee(ArgumentMatchers.any(Coffee.class))).thenReturn(cf);		
+		
+		mockMvc.perform(post("/coffees")
+			   .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+			   .param("id", "")
+			   .param("name", "so")
+			   )
+			   .andExpect(status().isOk())
+			   .andExpect(view().name("coffeeForm"));		
 		
 	}
 	

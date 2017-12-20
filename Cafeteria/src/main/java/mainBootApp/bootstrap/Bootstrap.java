@@ -65,27 +65,31 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent>{
 		
 		Note espressoNote = new Note();		
 		String prepareEspresso = "The espresso (aka “short black”) is the foundation and the most important part to every espresso based drink. "
-								+ "So much so that we’ve written a guide on how to make the perfect espresso shot. "
-				                + "But for the purposes of this post an espresso consists of:";
+								+ "There’s nothing better in the  world than drinking a perfectly made coffee, and it all begins with a great shot of espresso. "
+								+ "A well extracted shot will bring out the subtle traits and earthy undertones of a coffee blend. "
+								+ "The coffee would not be bitter or acidic, rather balanced in its flavour.";
 		espressoNote.setCoffeeNote(prepareEspresso);		
 	
 		espresso.setNote(espressoNote);		
 		
 		espresso.getCategory().add(american);
 		
-		espresso.getIngredients().add(new Ingredient("1 Shot of espresso in an espresso cup", new BigDecimal(1), espresso));
+		espresso.getIngredients().add(new Ingredient("grams of coffee", new BigDecimal(18), espresso));
 		
 		list.add(espresso);
 		
-		
+		// Macchiato
 		Coffee macchiato = new Coffee();
 		
 		macchiato.setName("Macchiato");
 		
+		macchiato.setImage("src/main/resources/static/macchiato.jpg");
+		
 		Note macchiatoNote = new Note();
 		String prepareMacchiato = "A short macchiato is similar to an espresso but with a dollop of steamed milk and foam to mellow the harsh taste of an espresso. "
-								+ "You will find that baristas in different countries make short macchiatos differently. "
-								+ "However the traditional way of making a short macchiato is as follows:";
+								+ "The key to the perfect short macchiato is the rule of thirds. That is you want three different colored layers in the macchiato. "
+								+ "A bottom dark layer to represent the espresso, a middle layer that mixes the espresso and the milk, and a top layer of predominantly steamed milk. "
+								+ "Refer to the picture above as an example.";
 		macchiatoNote.setCoffeeNote(prepareMacchiato);
 		
 		macchiato.setNote(macchiatoNote);
@@ -93,11 +97,35 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent>{
 		macchiato.getCategory().add(africa);
 		macchiato.getCategory().add(india);
 		
-		macchiato.getIngredients().add(new Ingredient("Shot of espresso in a short glass or espresso cup", new BigDecimal(1), macchiato));
-		macchiato.getIngredients().add(new Ingredient("A dollop of steamed milk", new BigDecimal(1.5), macchiato));
-		macchiato.getIngredients().add(new Ingredient("A foam placed on top of the espresso", new BigDecimal(0.5), macchiato));
+		macchiato.getIngredients().add(new Ingredient("grams of espresso coffee", new BigDecimal(18), macchiato));
+		macchiato.getIngredients().add(new Ingredient("dollop of steamed milk", new BigDecimal(1.5), macchiato));
+		macchiato.getIngredients().add(new Ingredient("foam placed on top", new BigDecimal(0.5), macchiato));
 		
 		list.add(macchiato);
+		
+		
+		// Caffe Latte
+		
+		Coffee latte = new Coffee();
+		latte.setName("Cafe Latte");
+		latte.setImage("src/main/resources/static/latte.jpg");
+		
+		Note latteNote = new Note();
+		String prepareLatte = "A café latte, or “latte” for short, is an espresso based drink with steamed milk and micro-foam added to the coffee. "
+				+ "This coffee is much sweeter compared to an espresso due to the steamed milk. It is made as follows";
+		latteNote.setCoffeeNote(prepareLatte);
+		latte.setNote(latteNote);
+		
+		latte.getCategory().add(american);
+		latte.getCategory().add(asia);
+		latte.getCategory().add(india);
+		latte.getCategory().add(africa);
+		
+		latte.getIngredients().add(new Ingredient("grams of espresso coffee", new BigDecimal(18), latte));
+		latte.getIngredients().add(new Ingredient("ml of steamed milk", new BigDecimal(10), latte));		
+		latte.getIngredients().add(new Ingredient("ml micro-foam on top", new BigDecimal(5), latte));
+		
+		list.add(latte);
 		
 		return list;
 		

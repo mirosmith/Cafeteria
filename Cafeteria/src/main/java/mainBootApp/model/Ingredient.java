@@ -3,13 +3,14 @@ package mainBootApp.model;
 import java.math.BigDecimal;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Ingredient {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
+	private Long id;	
 	
 	private String description;
 	

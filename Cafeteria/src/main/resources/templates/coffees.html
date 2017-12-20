@@ -18,7 +18,8 @@
 				<li th:each="item : ${coffeeList}">
 					<a href="#" th:href="@{'/coffees/'+ ${item.id}}">
 						<p>
-							<img alt="espresso" src="#" th:src="@{/espresso.jpg}">
+							<img alt="image" src="#" height="200"
+							th:src="${item.image} ? @{'/coffees/' + ${item.id} + '/img'} : @{/no-image.jpg}">
 						</p>
 						<p class="label" th:text="${item.name}">Coffee name</p>
 					</a>

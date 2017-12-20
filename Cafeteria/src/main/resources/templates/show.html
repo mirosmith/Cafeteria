@@ -15,7 +15,10 @@
 	<div class="container">
 		<a class="link" href="#" th:href="@{'/coffees/' + ${coffee.id} + '/update'}">Update</a>
 		<a class="link" href="#" th:href="@{'/coffees/' + ${coffee.id} + '/delete'}">Delete</a>		
-		<p><img src="#" th:src="@{/espresso.jpg}"></p>		
+		<p>
+			<img alt="image" src="#" height="200"
+				th:src="${coffee.image} ? @{'/coffees/' + ${coffee.id} + '/img'} : @{/no-image.jpg}">
+		</p>		
 		<div class="element">			
 			<h3>NAME</h3>
 			<p th:text="${coffee.name}">Name</p>

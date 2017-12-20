@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+
 
 @Entity
 public class Coffee {
@@ -18,6 +20,7 @@ public class Coffee {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@Size(min=3, max=20)
 	private String name;
 	
 	@Lob
@@ -27,7 +30,7 @@ public class Coffee {
 	private Note note;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="coffee")
-	private List<Ingredient> ingredients = new ArrayList<>();
+	private List<Ingredient> ingredients = new ArrayList<>();	
 	
 	@ManyToMany
 	@JoinTable(name="Coffe_Category", joinColumns=@JoinColumn(name="Coffee_id"), inverseJoinColumns=@JoinColumn(name="Category_id"))
@@ -89,17 +92,17 @@ public class Coffee {
 		}
 		try {
 		
-		Path path = Paths.get(s);
-		
-		if (Files.notExists(path) || Files.size(path) == 0) {
-			return null;			
-		}
-		byte[] array = new byte[(int)Files.size(path)];
-		
-		InputStream input = Files.newInputStream(path);
-		input.read(array);
-		
-		return array;
+			Path path = Paths.get(s);
+			
+			if (Files.notExists(path) || Files.size(path) == 0) {
+				return null;			
+			}
+			byte[] array = new byte[(int)Files.size(path)];
+			
+			InputStream input = Files.newInputStream(path);
+			input.read(array);
+			
+			return array;
 		
 		}
 		catch (IOException e) {

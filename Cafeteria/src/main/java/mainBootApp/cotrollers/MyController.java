@@ -1,9 +1,17 @@
 package mainBootApp.cotrollers;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -78,8 +86,13 @@ public class MyController {
 	}
 	
 	@PostMapping("/coffees")
-	public String updatePostCoffeeById(@ModelAttribute Coffee coffee) {		
+	public String saveOrUpdate(@Valid @ModelAttribute Coffee coffee, BindingResult bindingResult, Model model) {		
 		
+		if (bindingResult.hasErrors()) {
+			List<Category> categories = service.allCategories();			
+			model.addAttribute("allCategories", categories);			
+			return "coffeeForm";
+		}
 		Coffee savedCoffee = service.saveCoffee(coffee);		
 		
 		return "redirect:/coffees/" + savedCoffee.getId();
@@ -107,6 +120,22 @@ public class MyController {
 		model.addAttribute("newIngr", ingredient);
 		
 		return "coffeeForm";
+	}
+	
+	@GetMapping("/coffees/{id}/img")
+	public void renderImageFromDb(@PathVariable String id, HttpServletResponse response) throws IOException {
+		
+		Coffee foundCoffee = service.findCoffeeById(new Long(id));
+		
+		if (foundCoffee.getImage() != null) {            
+
+            response.setContentType("image/jpeg");
+            InputStream is = new ByteArrayInputStream(foundCoffee.getImage());
+            IOUtils.copy(is, response.getOutputStream());
+            
+            
+        }
+		
 	}
 	
 
