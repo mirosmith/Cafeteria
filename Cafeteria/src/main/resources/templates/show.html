@@ -13,11 +13,11 @@
 	</div>
 	
 	<div class="container">
-		<a class="link" href="#" th:href="@{'/coffees/' + ${coffee.id} + '/update'}">Update</a>
-		<a class="link" href="#" th:href="@{'/coffees/' + ${coffee.id} + '/delete'}">Delete</a>		
+		<a class="link" href="#" th:href="@{/coffees/{id}/update(id=${coffee.id})}">Update</a>
+		<a class="link" href="#" th:href="@{/coffees/{id}/delete(id=${coffee.id})}">Delete</a>		
 		<p>
 			<img alt="image" src="#" height="200"
-				th:src="${coffee.image} ? @{'/coffees/' + ${coffee.id} + '/img'} : @{/no-image.jpg}">
+				th:src="${coffee.image} ? @{/coffees/{id}/img(id=${coffee.id})} : @{/no-image.jpg}">
 		</p>		
 		<div class="element">			
 			<h3>NAME</h3>

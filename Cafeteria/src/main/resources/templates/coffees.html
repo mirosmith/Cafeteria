@@ -19,7 +19,7 @@
 					<a href="#" th:href="@{'/coffees/'+ ${item.id}}">
 						<p>
 							<img alt="image" src="#" height="200"
-							th:src="${item.image} ? @{'/coffees/' + ${item.id} + '/img'} : @{/no-image.jpg}">
+							th:src="${item.image} ? @{/coffees/{id}/img(id=${item.id})} : @{/no-image.jpg}">
 						</p>
 						<p class="label" th:text="${item.name}">Coffee name</p>
 					</a>

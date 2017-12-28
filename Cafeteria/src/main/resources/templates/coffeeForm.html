@@ -56,7 +56,7 @@
 					<input class="large" type="text" th:field="${coffee.ingredients[__${i.index}__].description}">
 				</li>				
 				<li th:if="${newIngr == null and coffee.id != null}">
-					<a class="link" href="#"  th:href="@{'/coffees/'+ *{id} + '/ingredients/new'}">new ingredient</a>				
+					<a class="link" href="#"  th:href="@{/coffees/{id}/ingredients/new(id=*{id})}">new ingredient</a>				
 				</li>
 			</ul>
 		 
