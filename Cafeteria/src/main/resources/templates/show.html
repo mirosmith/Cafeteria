@@ -33,8 +33,10 @@
 	    </div>          
 		<div class="element">
 			<h3>INGREDIENTS</h3>
-			<p th:each="ingr : ${coffee.ingredients}" 
-			   th:text="${ingr.id} + ' | ' + ${ingr.amount} + ' ' + ${ingr.description} + ' | ' + ${ingr.coffeeIngredient.id}">2x sugar</p>	   
+			<p th:each="ingr : ${coffee.ingredients}"> 
+				<span th:if="${ingr.amount}" th:text="${ingr.amount}">2x</span>
+				<span th:if="${ingr.description}" th:text="${ingr.description}">sugar</span> 
+			</p>	   
 	    </div>    
 	
 	</div>
